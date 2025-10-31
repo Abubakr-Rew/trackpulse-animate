@@ -20,11 +20,11 @@ export const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 px-4">
+    <section id="progress" className="py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
-            Dashboard
+            Your Workouts
           </h2>
           <div className="glass rounded-xl p-4 inline-block">
             <p className="text-lg font-medium">{quote}</p>
@@ -47,7 +47,7 @@ export const Dashboard = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div id="goals" className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <WorkoutForm onAdd={addWorkout} />
           <GoalsList />
         </div>
@@ -57,6 +57,6 @@ export const Dashboard = () => {
           <WeightChart />
         </div>
       </div>
-    </div>
+    </section>
   );
 };

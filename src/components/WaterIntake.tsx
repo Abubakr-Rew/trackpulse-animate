@@ -24,7 +24,7 @@ export const WaterIntake = () => {
 
   return (
     <div className="glass rounded-2xl p-6 hover:neon-glow transition-all duration-300">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <Droplet className="w-5 h-5 text-primary" />
           <h3 className="font-semibold">Water Intake</h3>
@@ -34,17 +34,53 @@ export const WaterIntake = () => {
           250ml
         </Button>
       </div>
-      
-      <div className="relative w-full h-4 bg-secondary rounded-full overflow-hidden">
+
+      <div className="flex items-center justify-center mb-4">
+        {/* Circular Progress */}
+        <div className="relative w-48 h-48">
+          <svg className="w-48 h-48 transform -rotate-90">
+            <circle
+              cx="96"
+              cy="96"
+              r="88"
+              stroke="hsl(var(--secondary))"
+              strokeWidth="12"
+              fill="none"
+            />
+            <circle
+              cx="96"
+              cy="96"
+              r="88"
+              stroke="url(#gradient)"
+              strokeWidth="12"
+              fill="none"
+              strokeDasharray={`${2 * Math.PI * 88}`}
+              strokeDashoffset={`${2 * Math.PI * 88 * (1 - percentage / 100)}`}
+              strokeLinecap="round"
+              className="transition-all duration-500 ease-out"
+            />
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="hsl(var(--gradient-start))" />
+                <stop offset="100%" stopColor="hsl(var(--gradient-end))" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="text-4xl font-bold gradient-text">{Math.round(percentage)}%</div>
+            <p className="text-sm text-muted-foreground mt-1">
+              {currentIntake}ml / {DAILY_GOAL}ml
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative w-full h-2 bg-secondary rounded-full overflow-hidden">
         <div
           className="absolute inset-y-0 left-0 gradient-bg transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
         />
       </div>
-      
-      <p className="text-sm text-muted-foreground mt-2 text-center">
-        {currentIntake}ml / {DAILY_GOAL}ml
-      </p>
     </div>
   );
 };
